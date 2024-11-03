@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnailCorreios - Seleção de Itens</title>
+    <link rel="icon" href="https://i.im.ge/2024/09/17/fv9Mp8.mascote2.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .h {
+            background-color: #4A90E2;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+        .c {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .g {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .ic {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            text-align: center;
+            padding: 10px;
+            transition: transform 0.2s;
+        }
+        .ic:hover {
+            transform: scale(1.05);
+        }
+        .ii {
+            width: 100%;
+            height: 150px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background-size: cover;
+            background-position: center;
+        }
+        .it {
+            font-size: 1em;
+            margin: 10px 0;
+            color: #4A90E2;
+        }
+        .is {
+            padding: 8px 12px;
+            font-size: 0.9em;
+            background-color: #4A90E2;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .is:hover {
+            background-color: #357ABD;
+        }
+        .s {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #4A90E2;
+            color: white;
+            border-radius: 8px;
+        }
+        .gc {
+            margin-top: 20px;
+            padding: 12px;
+            font-size: 1em;
+            background-color: #FFD700;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .gc:hover {
+            background-color: #FFC107;
+        }
+        .oc {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="h">Selecione seu item - SnailCorreios</div>
+    <div class="c">
+        <h2>Escolha apenas um item para seu pedido</h2>
+        
+        <div class="g">
+            <div class="ic">
+                <div class="ii" id="e-img" style="background-image: url('https://i.im.ge/2024/11/02/kkWfyC.Designer-2.jpeg');"></div>
+                <div class="it">Envelope</div>
+                <button class="is" onclick="selectItem('Envelope', 'Documentos', '50g', '1-3 dias úteis', 'ENV123', 'https://via.placeholder.com/150')">Selecionar</button>
+            </div>
+            <div class="ic">
+                <div class="ii" id="b-img" style="background-image: url('https://i.im.ge/2024/11/02/kkZMa0.Designer-3.jpeg');"></div>
+                <div class="it">Brinquedo</div>
+                <button class="is" onclick="selectItem('Brinquedo', 'Infantil', '300g', '3-5 dias úteis', 'TOY456', 'https://via.placeholder.com/150')">Selecionar</button>
+            </div>
+            <div class="ic">
+                <div class="ii" id="t-img" style="background-image: url('https://via.placeholder.com/150');"></div>
+                <div class="it">Televisão</div>
+                <button class="is" onclick="selectItem('Televisão', 'Eletrônico', '7kg', '5-7 dias úteis', 'TV789', 'https://via.placeholder.com/150')">Selecionar</button>
+            </div>
+            <div class="ic">
+                <div class="ii" id="g-img" style="background-image: url('https://via.placeholder.com/150');"></div>
+                <div class="it">Geladeira</div>
+                <button class="is" onclick="selectItem('Geladeira', 'Eletrodoméstico', '60kg', '7-10 dias úteis', 'FRG101', 'https://via.placeholder.com/150')">Selecionar</button>
+            </div>
+        </div>
+
+        <div class="s">
+            <h3>Resumo do Pedido</h3>
+            <p id="si">Item Selecionado: Nenhum</p>
+            <p id="tp">Tipo do Pedido: -</p>
+            <p id="pw">Peso: -</p>
+            <p id="dt">Prazo de Entrega: -</p>
+            <p id="ic">Código do Pedido: -</p>
+            <div class="ii" id="s-img" style="width: 100px; height: 100px; margin-top: 10px;"></div>
+            <button class="gc" onclick="generateOrderCode()">Confirmar Código</button>
+            <div class="oc" id="oc"></div>
+        </div>
+    </div>
+
+    <script>
+        let selectedItem = null;
+        let itemCode = null;
+
+        function selectItem(item, type, weight, deliveryTime, code, imageUrl) {
+            selectedItem = item;
+            itemCode = code;
+            document.getElementById("si").textContent = "Item Selecionado: " + selectedItem;
+            document.getElementById("tp").textContent = "Tipo do Pedido: " + type;
+            document.getElementById("pw").textContent = "Peso: " + weight;
+            document.getElementById("dt").textContent = "Prazo de Entrega: " + deliveryTime;
+            document.getElementById("ic").textContent = "Código do Pedido: " + itemCode;
+            document.getElementById("s-img").style.backgroundImage = `url(${imageUrl})`;
+        }
+
+        function generateOrderCode() {
+            if (!selectedItem) {
+                alert("Por favor, selecione um item.");
+                return;
+            }
+            document.getElementById("oc").textContent = "Código gerado: " + itemCode;
+        }
+    </script>
+</body>
+</html>
